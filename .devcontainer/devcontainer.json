@@ -30,7 +30,8 @@
     "python.analysis.diagnosticMode": "workspace",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true
+      // TODO: sortが終わらないエラーが発生するためコメントアウト
+      "source.organizeImports": false
     },
     "[python]": {
       "editor.tabSize": 4
