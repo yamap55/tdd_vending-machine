@@ -2,7 +2,7 @@
 自動販売機
 """
 
-from typing import List
+from typing import List, Any
 from .money import Money
 
 
@@ -15,16 +15,19 @@ class VendingMachine:
         """初期化処理"""
         self.having_money = []
 
-    def insert(self, money):
+    def insert(self, money) -> Any:
         """
         お金を投入
 
         Parameters
         ----------
-        money : Money
+        money : Any
             投入
         """
-        self.having_money.append(money)
+        if isinstance(money, Money):
+            self.having_money.append(money)
+            return None
+        return money
 
     def get_total_amount(self) -> int:
         """
