@@ -2,13 +2,18 @@
 自動販売機
 """
 
+from typing import List
+from .money import Money
+
 
 class VendingMachine:
     """
     自動販売機
     """
 
-    total_amount = 0
+    def __init__(self):
+        """初期化処理"""
+        self.having_money = []
 
     def insert(self, money):
         """
@@ -19,7 +24,7 @@ class VendingMachine:
         money : Money
             投入
         """
-        self.total_amount += money.amount
+        self.having_money.append(money)
 
     def get_total_amount(self) -> int:
         """
@@ -30,4 +35,15 @@ class VendingMachine:
         int
             投入金額
         """
-        return self.total_amount
+        return sum([m.amount for m in self.having_money])
+
+    def refund(self) -> List[Money]:
+        """
+        今まで投入された金額を払い戻す
+
+        Returns
+        -------
+        List[Money]
+            投入された金額
+        """
+        return self.having_money
