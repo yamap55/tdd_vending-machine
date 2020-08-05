@@ -3,29 +3,30 @@ from vending_machine.money import Coin10Yen, Coin50Yen, Coin100Yen, Coin500Yen, 
 import pytest
 
 
-@pytest.mark.parametrize(
-    "money, amount",
-    [
-        (Coin10Yen(), 10),
-        (Coin50Yen(), 50),
-        (Coin100Yen(), 100),
-        (Coin500Yen(), 500),
-        (Bill1000Yen(), 1000),
-    ],
-)
-def test_insert(money, amount):
-    vending_machine = VendingMachine()
-    vending_machine.insert(money)
+class TestVendingMachine:
+    def setup_method(self, method):
+        self.vending_machine = VendingMachine()
 
-    assert vending_machine.get_total_amount() == amount
+    @pytest.mark.parametrize(
+        "money, amount",
+        [
+            (Coin10Yen(), 10),
+            (Coin50Yen(), 50),
+            (Coin100Yen(), 100),
+            (Coin500Yen(), 500),
+            (Bill1000Yen(), 1000),
+        ],
+    )
+    def test_insert(self, money, amount):
+        self.vending_machine.insert(money)
 
+        assert self.vending_machine.get_total_amount() == amount
 
-def test_multiple_insert():
-    vending_machine = VendingMachine()
-    vending_machine.insert(Coin10Yen())
-    vending_machine.insert(Coin50Yen())
-    vending_machine.insert(Coin100Yen())
-    vending_machine.insert(Coin500Yen())
-    vending_machine.insert(Bill1000Yen())
+    def test_multiple_insert(self):
+        self.vending_machine.insert(Coin10Yen())
+        self.vending_machine.insert(Coin50Yen())
+        self.vending_machine.insert(Coin100Yen())
+        self.vending_machine.insert(Coin500Yen())
+        self.vending_machine.insert(Bill1000Yen())
 
-    assert vending_machine.get_total_amount() == 1660
+        assert self.vending_machine.get_total_amount() == 1660
