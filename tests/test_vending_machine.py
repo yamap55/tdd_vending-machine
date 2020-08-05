@@ -4,13 +4,20 @@ import pytest
 
 
 @pytest.mark.parametrize(
-    "money", [Coin10Yen(), Coin50Yen(), Coin100Yen(), Coin500Yen(), Bill1000Yen()]
+    "money, amount",
+    [
+        (Coin10Yen(), 10),
+        (Coin50Yen(), 50),
+        (Coin100Yen(), 100),
+        (Coin500Yen(), 500),
+        (Bill1000Yen(), 1000),
+    ],
 )
-def test_insert(money):
+def test_insert(money, amount):
     vending_machine = VendingMachine()
     vending_machine.insert(money)
 
-    assert vending_machine.get_total_amount() == 10
+    assert vending_machine.get_total_amount() == amount
 
 
 def test_multiple_insert():
