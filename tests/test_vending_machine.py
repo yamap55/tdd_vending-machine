@@ -8,19 +8,17 @@ import pytest
 )
 def test_insert(money):
     vending_machine = VendingMachine()
-    try:
-        vending_machine.insert(money)
-    except Exception:
-        pytest.fail()
+    vending_machine.insert(money)
+
+    assert vending_machine.show_amount() == 10
 
 
 def test_multiple_insert():
     vending_machine = VendingMachine()
-    try:
-        vending_machine.insert(Coin10Yen())
-        vending_machine.insert(Coin50Yen())
-        vending_machine.insert(Coin100Yen())
-        vending_machine.insert(Coin500Yen())
-        vending_machine.insert(Bill1000Yen())
-    except Exception:
-        pytest.fail()
+    vending_machine.insert(Coin10Yen())
+    vending_machine.insert(Coin50Yen())
+    vending_machine.insert(Coin100Yen())
+    vending_machine.insert(Coin500Yen())
+    vending_machine.insert(Bill1000Yen())
+
+    assert vending_machine.show_amount() == 1660
