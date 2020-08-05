@@ -42,17 +42,18 @@ class TestVendingMachine:
         assert self.vending_machine.refund() == []
 
     @pytest.mark.parametrize(
-        "insert_item, return_item",
+        "insert_item, return_item, total_amount",
         [
-            (Coin10Yen(), None),
-            (Coin50Yen(), None),
-            (Coin100Yen(), None),
-            (Coin500Yen(), None),
-            (Bill1000Yen(), None),
-            (1, 1),
-            ("a", "a"),
-            ([], []),
+            (Coin10Yen(), None, 10),
+            (Coin50Yen(), None, 50),
+            (Coin100Yen(), None, 100),
+            (Coin500Yen(), None, 500),
+            (Bill1000Yen(), None, 1000),
+            (1, 1, 0),
+            ("a", "a", 0),
+            ([], [], 0),
         ],
     )
-    def test_insert_return_item(self, insert_item, return_item):
+    def test_insert_return_item(self, insert_item, return_item, total_amount):
         assert self.vending_machine.insert(insert_item) == return_item
+        assert self.vending_machine.get_total_amount() == total_amount
