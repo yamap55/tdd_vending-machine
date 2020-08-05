@@ -30,3 +30,9 @@ class TestVendingMachine:
         self.vending_machine.insert(Bill1000Yen())
 
         assert self.vending_machine.get_total_amount() == 1660
+
+    def test_refund(self):
+        money = Coin10Yen()
+        self.vending_machine.insert(money)
+        assert self.vending_machine.refund() == [money]
+
