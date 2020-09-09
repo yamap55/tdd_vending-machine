@@ -10,3 +10,9 @@ class TestInsert:
             VendingMachine().insert(money)
         except Exception as e:
             pytest.fail(e)
+
+    def test_insert_multiple_money(self):
+        try:
+            VendingMachine().insert(Coin10(), Coin50())
+        except Exception as e:
+            pytest.fail(e)
