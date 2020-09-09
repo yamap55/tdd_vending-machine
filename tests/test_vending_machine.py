@@ -4,9 +4,9 @@ import pytest
 
 
 class TestInsert:
-    @pytest.mark.parametrize("coin", [Coin10(), Coin50(), Coin100(), Bill1000()])
-    def test_insert_coin(self, coin):
+    @pytest.mark.parametrize("money", [Coin10(), Coin50(), Coin100(), Bill1000()])
+    def test_insert_money(self, money):
         try:
-            VendingMachine().insert(coin)
+            VendingMachine().insert(money)
         except Exception as e:
             pytest.fail(e)
