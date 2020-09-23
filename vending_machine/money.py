@@ -3,8 +3,8 @@
 
 class Money:
     """お金"""
-
-    pass
+    def __init__(self):
+        self.yen = 0
 
 
 class Bill(Money):
@@ -16,7 +16,8 @@ class Bill(Money):
 class Bill1000(Bill):
     """1000円札"""
 
-    pass
+    def __init__(self):
+        self.yen = 1000
 
 
 class Coin(Money):
@@ -28,24 +29,28 @@ class Coin(Money):
 
 
 class Coin10(Coin):
-    """100円硬貨"""
+    """10円硬貨"""
 
-    pass
+    def __init__(self):
+        self.yen = 10
 
 
 class Coin50(Coin):
-    """100円硬貨"""
+    """50円硬貨"""
 
-    pass
+    def __init__(self):
+        self.yen = 50
 
 
 class Coin100(Coin):
     """100円硬貨"""
 
-    pass
+    def __init__(self):
+        self.yen = 100
 
 
 class Coin500(Coin):
-    """100円硬貨"""
+    """500円硬貨"""
 
-    pass
+    def __init__(self):
+        self.yen = 500

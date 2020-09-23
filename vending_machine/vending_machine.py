@@ -9,16 +9,17 @@ class VendingMachine:
     def __init__(self, amount = 0) -> None:
         self.amount = amount
 
-    def insert(self, *money: Money) -> None:
+    def insert(self, *moneys: Money) -> None:
         """
         お金投入
 
         Parameters
         ----------
-        money : List[Money]
+        money : Money
             投入するお金
         """
-        pass
+        for money in moneys:
+            self.amount += money.yen
 
     def get_total_amount(self) -> int:
         return self.amount
