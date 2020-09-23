@@ -4,18 +4,27 @@ import pytest
 
 
 class TestInsert:
-    @pytest.mark.parametrize("money", [Coin10(), Coin50(), Coin100(), Bill1000()])
-    def test_insert_money(self, money):
-        try:
-            VendingMachine().insert(money)
-        except Exception as e:
-            pytest.fail(e)
+    @pytest.mark.parametrize("money, money_yen", [
+            (Coin10(), 10),
+            (Coin50(), 50),
+            (Coin100(), 100),
+            (Bill1000(), 1000)
+        ])
+    def test_insert_money(self, money, money_yen):
+        vending_machine = VendingMachine()
+        vending_machine.insert(money)
+
+        actual = vending_machine.amount
+        expected = money_yen
+        assert actual == expected
 
     def test_insert_multiple_money(self):
-        try:
-            VendingMachine().insert(Coin10(), Coin50())
-        except Exception as e:
-            pytest.fail(e)
+        vending_machine = VendingMachine()
+        vending_machine.insert(Coin10(), Bill1000())
+
+        actual = vending_machine.amount
+        expected = 1010
+        assert actual == expected
 
 
 class TestGetTotalAmount:
