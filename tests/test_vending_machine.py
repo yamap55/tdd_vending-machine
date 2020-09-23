@@ -16,3 +16,11 @@ class TestInsert:
             VendingMachine().insert(Coin10(), Coin50())
         except Exception as e:
             pytest.fail(e)
+
+
+class TestGetTotalAmount:
+    def test_amount_10(self):
+        vending_machine = VendingMachine(amount=10)
+        actual = vending_machine.get_total_amount()
+        expected = 10
+        assert actual == expected
