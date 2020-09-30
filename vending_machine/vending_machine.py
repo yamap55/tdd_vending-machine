@@ -20,8 +20,7 @@ class VendingMachine:
         money : Money
             投入するお金
         """
-        for money in moneys:
-            self.money_box.append(money)
+        self.money_box.extend(moneys)
 
     def get_total_amount(self) -> int:
         """投入金額の総計を取得"""
