@@ -4,12 +4,9 @@ import pytest
 
 
 class TestInsert:
-    @pytest.mark.parametrize("money, money_yen", [
-            (Coin10(), 10),
-            (Coin50(), 50),
-            (Coin100(), 100),
-            (Bill1000(), 1000)
-        ])
+    @pytest.mark.parametrize(
+        "money, money_yen", [(Coin10(), 10), (Coin50(), 50), (Coin100(), 100), (Bill1000(), 1000)]
+    )
     def test_insert_money(self, money, money_yen):
         vending_machine = VendingMachine()
         vending_machine.insert(money)
