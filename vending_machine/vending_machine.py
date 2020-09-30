@@ -25,7 +25,4 @@ class VendingMachine:
 
     def get_total_amount(self) -> int:
         """投入金額の総計を取得"""
-        total = 0
-        for money in self.money_box:
-            total += money.yen
-        return total
+        return sum([money.yen for money in self.money_box])
