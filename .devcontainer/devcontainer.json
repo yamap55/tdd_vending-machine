@@ -14,6 +14,7 @@
   "settings": {
     "files.eol": "\n",
     "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
     "terminal.integrated.shell.linux": "/bin/bash",
     "python.pythonPath": "/usr/local/bin/python",
     "python.linting.pylintEnabled": false,
@@ -28,10 +29,15 @@
     "python.testing.nosetestsEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.analysis.diagnosticMode": "workspace",
+    "python.jediEnabled": false,
+    "python.languageServer": "Pylance",
+    "python.analysis.typeCheckingMode": "basic",
+    "vsintellicode.python.completionsEnabled": true,
+    "vsintellicode.features.python.deepLearning": "enabled",
+    "vsintellicode.modify.editor.suggestSelection": "enabled",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      // TODO: sortが終わらないエラーが発生するためコメントアウト
-      "source.organizeImports": false
+      "source.organizeImports": true
     },
     "[python]": {
       "editor.tabSize": 4
@@ -47,6 +53,7 @@
     "esbenp.prettier-vscode",
     "njpwerner.autodocstring",
     "eamodio.gitlens",
-    "ms-pyright.pyright"
+    "ms-python.vscode-pylance",
+    "VisualStudioExptTeam.vscodeintellicode"
   ]
 }
