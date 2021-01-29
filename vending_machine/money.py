@@ -8,13 +8,13 @@ class Money:
     お金
     """
 
-    def __init__(self, price: int):
+    def __init__(self, amount: int):
         """
         コンストラクタ
 
         Parameters
         ----------
-        price : int
-            価値 # TODO: 命名
+        amount : int
+            金額
         """
-        self.price = price
+        self.amount = amount
