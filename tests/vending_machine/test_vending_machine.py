@@ -25,3 +25,13 @@ def test_insert(amount):
         VendingMachine().insert(money)
     except AttributeError:
         pytest.fail()
+
+
+def test_multiple_insert():
+    money1 = Money(10)
+    money2 = Money(100)
+
+    try:
+        VendingMachine().insert(money1, money2)
+    except AttributeError:
+        pytest.fail()
