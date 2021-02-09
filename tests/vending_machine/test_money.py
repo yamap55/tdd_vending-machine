@@ -5,4 +5,7 @@ def test_exists_money():
 
     money = Money(100)
     assert money
-    assert money.amount == 100
+
+    actual = money.amount
+    expected = 100
+    assert actual == expected
