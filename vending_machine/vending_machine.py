@@ -10,7 +10,7 @@ class VendingMachine:
     飲み物の自動販売機
     """
 
-    def insert(self, money: Money):
+    def insert(self, *money: Money):
         """
         お金を投入。
 
