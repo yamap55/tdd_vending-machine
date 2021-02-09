@@ -56,3 +56,15 @@ def test_total():
     expected = 110
 
     assert actual == expected
+
+
+def test_total_1():
+    money1 = Money(10)
+
+    vending_machine = VendingMachine()
+    vending_machine.insert(money1)
+
+    actual = vending_machine.total
+    expected = 10
+
+    assert actual == expected
