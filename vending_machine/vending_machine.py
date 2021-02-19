@@ -16,7 +16,7 @@ class VendingMachine:
         """
         self.total = 0
 
-    def insert(self, *money: Money) -> None:
+    def insert(self, *money_list: Money) -> None:
         """
         お金を投入。
 
@@ -25,4 +25,4 @@ class VendingMachine:
         money : Money
             投入金額
         """
-        self.total += sum(money.amount for money in money)
+        self.total += sum(money.amount for money in money_list)
