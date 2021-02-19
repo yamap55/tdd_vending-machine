@@ -25,9 +25,4 @@ class VendingMachine:
         money : Money
             投入金額
         """
-        if len(money) == 1:
-            self.total += money[0].amount
-            return
-
-        total = money[0].amount + money[1].amount
-        self.total += total
+        self.total += sum(money.amount for money in money)
