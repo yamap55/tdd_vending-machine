@@ -22,7 +22,7 @@ class VendingMachine:
 
         Parameters
         ----------
-        money : Money
+        money_list : Money
             投入金額
         """
         self.total += sum(money.amount for money in money_list)
