@@ -11,13 +11,7 @@ def test_exists_vending_machine():
 
 @pytest.mark.parametrize(
     "amount",
-    [
-        (10,),
-        (50,),
-        (100,),
-        (500,),
-        (1000,),
-    ],
+    [10, 50, 100, 500, 1000],
 )
 def test_insert(amount):
     money = Money(amount)
