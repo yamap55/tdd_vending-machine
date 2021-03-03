@@ -16,8 +16,19 @@ class VendingMachine:
         """
         初期処理
         """
-        self.total = 0
         self.money_box = []
+
+    @property
+    def total(self) -> int:
+        """
+        投入金額を返す
+
+        Returns
+        -------
+        int
+            投入金額
+        """
+        return sum(money.amount for money in self.money_box)
 
     def insert(self, *money_list: Money) -> None:
         """
@@ -29,7 +40,6 @@ class VendingMachine:
             投入金額
         """
         self.money_box += [*money_list]
-        self.total += sum(money.amount for money in money_list)
 
     def pay_back(self) -> List[Money]:
         """
