@@ -19,25 +19,11 @@ def test_insert(amount_list, expected_total):
     assert vending_machine.total == expected_total
 
 
-def test_pay_back():
+@pytest.mark.parametrize("money_list", [[Money(10)], [Money(10), Money(1000)]])
+def test_pay_back(money_list):
     vending_machine = VendingMachine()
-
-    insert_money = Money(10)
-    vending_machine.insert(insert_money)
+    vending_machine.insert(*money_list)
 
     actual = vending_machine.pay_back()
-    expected = [insert_money]
-    assert actual == expected
-
-
-def test_pay_back_2():
-    vending_machine = VendingMachine()
-
-    insert_money1 = Money(10)
-    vending_machine.insert(insert_money1)
-    insert_money2 = Money(1000)
-    vending_machine.insert(insert_money2)
-
-    actual = vending_machine.pay_back()
-    expected = [insert_money1, insert_money2]
+    expected = money_list
     assert actual == expected
