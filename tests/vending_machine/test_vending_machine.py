@@ -26,5 +26,18 @@ def test_pay_back():
     vending_machine.insert(insert_money)
 
     actual = vending_machine.pay_back()
-    expected = insert_money
+    expected = [insert_money]
+    assert actual == expected
+
+
+def test_pay_back_2():
+    vending_machine = VendingMachine()
+
+    insert_money1 = Money(10)
+    vending_machine.insert(insert_money1)
+    insert_money2 = Money(1000)
+    vending_machine.insert(insert_money2)
+
+    actual = vending_machine.pay_back()
+    expected = [insert_money1, insert_money2]
     assert actual == expected
