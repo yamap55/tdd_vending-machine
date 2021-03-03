@@ -17,3 +17,14 @@ def test_insert(amount_list, expected_total):
     vending_machine = VendingMachine()
     vending_machine.insert(*money_list)
     assert vending_machine.total == expected_total
+
+
+def test_pay_back():
+    vending_machine = VendingMachine()
+
+    insert_money = Money(10)
+    vending_machine.insert(insert_money)
+
+    actual = vending_machine.pay_back()
+    expected = insert_money
+    assert actual == expected
