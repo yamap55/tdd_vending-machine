@@ -28,3 +28,7 @@ class TestVendingMachine:
         actual = self.vending_machine.pay_back()
         expected = money_list
         assert actual == expected
+
+    def test_insert_except_money(self):
+        with pytest.raises(ValueError):
+            self.vending_machine.insert(Money(1))
