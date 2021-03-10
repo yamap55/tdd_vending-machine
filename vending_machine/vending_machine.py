@@ -39,8 +39,10 @@ class VendingMachine:
         money_list : Money
             投入金額
         """
-        if 1 in [x.amount for x in [*money_list]]:
-            raise ValueError()
+        if Money(1).amount in [money.amount for money in [*money_list]]:
+            raise ValueError(
+                f"Except money error: {Money(1).amount}, [10, 50, 100, 500, 1000] are available."
+            )
         self.money_box += [*money_list]
 
     def pay_back(self) -> List[Money]:
