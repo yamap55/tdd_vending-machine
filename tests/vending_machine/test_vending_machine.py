@@ -30,5 +30,9 @@ class TestVendingMachine:
         assert actual == expected
 
     def test_insert_except_money(self):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError) as excinfo:
             self.vending_machine.insert(Money(1))
+
+        actual = str(excinfo.value)
+        expected = "Except money error: 1, [10, 50, 100, 500, 1000] are available."
+        assert actual == expected
