@@ -39,6 +39,8 @@ class VendingMachine:
         money_list : Money
             投入金額
         """
+        if 1 in [x.amount for x in [*money_list]]:
+            raise ValueError()
         self.money_box += [*money_list]
 
     def pay_back(self) -> List[Money]:
