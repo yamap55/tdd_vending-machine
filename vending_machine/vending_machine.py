@@ -18,11 +18,12 @@ class VendingMachine:
         """
         self.money_box = []
         self.allow_money = (
-            Money(10),
-            Money(50),
-            Money(100),
-            Money(500),
-            Money(1000),
+            Money.M_10,
+            Money.M_50,
+            Money.M_100,
+            Money.M_500,
+            Money.M_1000,
+            Money.M_5000,
         )
 
     @property
@@ -47,7 +48,7 @@ class VendingMachine:
             投入金額
         """
         for money in money_list:
-            if money.amount not in [m.amount for m in self.allow_money]:
+            if money not in self.allow_money:
                 raise ValueError(
                     f"Except money error: {money.amount}, [10, 50, 100, 500, 1000] are available."
                 )

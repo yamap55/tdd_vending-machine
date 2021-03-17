@@ -21,7 +21,7 @@ class TestVendingMachine:
         self.vending_machine.insert(*money_list)
         assert self.vending_machine.total == expected_total
 
-    @pytest.mark.parametrize("money_list", [[Money(10)], [Money(10), Money(1000)]])
+    @pytest.mark.parametrize("money_list", [[Money.M_10], [Money.M_10, Money.M_1000]])
     def test_pay_back(self, money_list):
         self.vending_machine.insert(*money_list)
 
@@ -29,11 +29,11 @@ class TestVendingMachine:
         expected = money_list
         assert actual == expected
 
-    @pytest.mark.parametrize("amount", [(1,), (10000,), (11,)])
-    def test_insert_except_money(self, amount):
+    @pytest.mark.parametrize("money", [Money.M_1, Money.M_2000, Money.M_10000])
+    def test_insert_except_money(self, money):
         with pytest.raises(ValueError) as excinfo:
-            self.vending_machine.insert(Money(amount))
+            self.vending_machine.insert(money)
 
         actual = str(excinfo.value)
-        expected = f"Except money error: {amount}, [10, 50, 100, 500, 1000] are available."
+        expected = f"Except money error: {money.amount}, [10, 50, 100, 500, 1000] are available."
         assert actual == expected
