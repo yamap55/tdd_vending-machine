@@ -29,10 +29,18 @@ class TestVendingMachine:
         expected = money_list
         assert actual == expected
 
-    def test_insert_except_money(self):
+    def test_insert_except_money_1(self):
         with pytest.raises(ValueError) as excinfo:
             self.vending_machine.insert(Money(1))
 
         actual = str(excinfo.value)
         expected = "Except money error: 1, [10, 50, 100, 500, 1000] are available."
+        assert actual == expected
+
+    def test_insert_except_money_10000(self):
+        with pytest.raises(ValueError) as excinfo:
+            self.vending_machine.insert(Money(10000))
+
+        actual = str(excinfo.value)
+        expected = "Except money error: 10000, [10, 50, 100, 500, 1000] are available."
         assert actual == expected
