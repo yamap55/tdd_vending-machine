@@ -29,18 +29,11 @@ class TestVendingMachine:
         expected = money_list
         assert actual == expected
 
-    def test_insert_except_money_1(self):
+    @pytest.mark.parametrize("amount", [(1,), (10000,), (11,)])
+    def test_insert_except_money(self, amount):
         with pytest.raises(ValueError) as excinfo:
-            self.vending_machine.insert(Money(1))
+            self.vending_machine.insert(Money(amount))
 
         actual = str(excinfo.value)
-        expected = "Except money error: 1, [10, 50, 100, 500, 1000] are available."
-        assert actual == expected
-
-    def test_insert_except_money_10000(self):
-        with pytest.raises(ValueError) as excinfo:
-            self.vending_machine.insert(Money(10000))
-
-        actual = str(excinfo.value)
-        expected = "Except money error: 10000, [10, 50, 100, 500, 1000] are available."
+        expected = f"Except money error: {amount}, [10, 50, 100, 500, 1000] are available."
         assert actual == expected
