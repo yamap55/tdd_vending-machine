@@ -21,6 +21,7 @@ class TestVendingMachine:
         self.vending_machine.insert(*money_list)
         assert self.vending_machine.total == expected_total
 
+    # TODO: Refactoring pay_back, (Driver, yamap55)
     @pytest.mark.parametrize("money_list", [[Money.M_10], [Money.M_10, Money.M_1000]])
     def test_pay_back(self, money_list):
         self.vending_machine.insert(*money_list)
