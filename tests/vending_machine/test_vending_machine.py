@@ -29,6 +29,13 @@ class TestVendingMachine:
         expected = money_list
         assert actual == expected
 
+    def test_check_empty_after_pay_back(self):
+        self.vending_machine.insert(Money.M_10)
+
+        actual = self.vending_machine.money_box
+        expected = []
+        assert actual == expected
+
     @pytest.mark.parametrize("money", [Money.M_1, Money.M_2000, Money.M_10000])
     def test_insert_except_money(self, money):
         with pytest.raises(ValueError) as excinfo:
