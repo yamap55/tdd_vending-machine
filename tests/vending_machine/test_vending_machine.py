@@ -32,6 +32,7 @@ class TestVendingMachine:
     def test_check_empty_after_pay_back(self):
         self.vending_machine.insert(Money.M_10)
 
+        self.vending_machine.pay_back()
         actual = self.vending_machine.money_box
         expected = []
         assert actual == expected

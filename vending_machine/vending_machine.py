@@ -63,4 +63,6 @@ class VendingMachine:
         Money
             投入金額の総計
         """
-        return self.money_box
+        money_paid_back = self.money_box
+        self.money_box = []
+        return money_paid_back
