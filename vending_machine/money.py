@@ -2,9 +2,10 @@
 お金
 """
 
-from enum import Enum
+from enum import Enum, unique
 
 
+@unique
 class Money(Enum):
     """
     お金
