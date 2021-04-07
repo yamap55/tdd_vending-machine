@@ -2,7 +2,7 @@
 飲み物の自動販売機
 """
 
-from typing import List
+from typing import Any, Dict, List
 
 from vending_machine.money import Money
 
@@ -72,3 +72,14 @@ class VendingMachine:
         money_paid_back = self.money_box
         self.money_box = []
         return money_paid_back
+
+    def get_inventory(self) -> List[Dict[str, Any]]:
+        """
+        在庫を返す
+
+        Returns
+        -------
+        List[Dict[str, Any]]
+            在庫
+        """
+        return [{"name": name, **info} for name, info in self.drink_box.items()]
