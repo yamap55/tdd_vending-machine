@@ -24,6 +24,12 @@ class VendingMachine:
             Money.M_500,
             Money.M_1000,
         )
+        self.drink_box = {
+            "cola": {
+                "amount": 5,
+                "price": 120,
+            },
+        }
 
     @property
     def total(self) -> int:
