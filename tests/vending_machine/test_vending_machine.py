@@ -22,6 +22,18 @@ class TestVendingMachine:
         }
         assert actual == expected
 
+    def test_initial_inventory(self):
+        actual = self.vending_machine.get_inventory()
+        expected = [
+            {
+                "name": "cola",
+                "amount": 5,
+                "price": 120,
+            }
+        ]
+
+        assert actual == expected
+
 
 class TestInsert:
     @pytest.fixture(autouse=True)
