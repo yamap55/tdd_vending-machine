@@ -21,23 +21,6 @@ class TestVendingMachine:
         self.vending_machine.insert(*money_list)
         assert self.vending_machine.total == expected_total
 
-    # TODO: Refactoring pay_back, (Driver, yamap55)
-    @pytest.mark.parametrize("money_list", [[Money.M_10], [Money.M_10, Money.M_1000]])
-    def test_pay_back(self, money_list):
-        self.vending_machine.insert(*money_list)
-
-        actual = self.vending_machine.pay_back()
-        expected = money_list
-        assert actual == expected
-
-    def test_check_empty_after_pay_back(self):
-        self.vending_machine.insert(Money.M_10)
-
-        self.vending_machine.pay_back()
-        actual = self.vending_machine.money_box
-        expected = []
-        assert actual == expected
-
     @pytest.mark.parametrize("money", [Money.M_1, Money.M_2000, Money.M_10000])
     def test_insert_except_money(self, money):
         with pytest.raises(ValueError) as excinfo:
@@ -45,4 +28,26 @@ class TestVendingMachine:
 
         actual = str(excinfo.value)
         expected = f"Except money error: {money.amount}, [10, 50, 100, 500, 1000] are available."
+        assert actual == expected
+
+
+class TestPayBack:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.vending_machine = VendingMachine()
+
+    @pytest.mark.parametrize("money_list", [[Money.M_10], [Money.M_10, Money.M_1000]])
+    def test_money_list(self, money_list):
+        self.vending_machine.insert(*money_list)
+
+        actual = self.vending_machine.pay_back()
+        expected = money_list
+        assert actual == expected
+
+    def test_check_empty(self):
+        self.vending_machine.insert(Money.M_10)
+
+        self.vending_machine.pay_back()
+        actual = self.vending_machine.money_box
+        expected = []
         assert actual == expected
