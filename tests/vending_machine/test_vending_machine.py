@@ -12,6 +12,16 @@ class TestVendingMachine:
     def test_exists_vending_machine(self):
         assert self.vending_machine
 
+    def test_drink_box(self):
+        actual = self.vending_machine.drink_box
+        expected = {
+            "cola": {
+                "amount": 5,
+                "price": 120,
+            }
+        }
+        assert actual == expected
+
 
 class TestInsert:
     @pytest.fixture(autouse=True)
