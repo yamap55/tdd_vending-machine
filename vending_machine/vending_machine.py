@@ -83,3 +83,7 @@ class VendingMachine:
             在庫
         """
         return [{"name": name, **info} for name, info in self.drink_box.items()]
+
+
+# TODO: drink_boxの持ち方？実装？を見直す driver: ozawa
+# 注意：責務を持ちすぎていませんか？責任を持ちすぎていたら分割しましょう
