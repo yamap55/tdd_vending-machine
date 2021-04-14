@@ -78,4 +78,4 @@ class VendingMachine:
         List[Dict[str, Any]]
             在庫
         """
-        return [{"name": name, **info} for name, info in self.drink_box.inventory.items()]
+        return self.drink_box.info()
