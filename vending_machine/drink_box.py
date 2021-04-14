@@ -30,3 +30,6 @@ class DrinkBox:
             管理している飲み物の情報
         """
         return [{"name": name, **info} for name, info in self.container.items()]
+
+
+# TODO: drink_boxのテストを書く。driverはyamap55
