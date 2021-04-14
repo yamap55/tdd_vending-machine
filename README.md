@@ -21,7 +21,7 @@
 
 1. VSCode 起動
 2. 左下の緑色のアイコンクリック
-3. 「Remote-Containersa: Reopen in Container」クリック
+3. 「Remote-Containers: Reopen in Container」クリック
 4. しばらく待つ
    - 初回の場合コンテナ image の取得や作成が行われる
 5. 起動したら開発可能
