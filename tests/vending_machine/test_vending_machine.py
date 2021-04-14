@@ -12,15 +12,9 @@ class TestVendingMachine:
     def test_exists_vending_machine(self):
         assert self.vending_machine
 
-    def test_drink_box(self):
+    def test_has_drink_box(self):
         actual = self.vending_machine.drink_box
-        expected = {
-            "cola": {
-                "amount": 5,
-                "price": 120,
-            }
-        }
-        assert actual == expected
+        assert actual
 
     def test_initial_inventory(self):
         actual = self.vending_machine.get_inventory()

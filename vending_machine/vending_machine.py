@@ -4,6 +4,7 @@
 
 from typing import Any, Dict, List
 
+from vending_machine.drink_box import DrinkBox
 from vending_machine.money import Money
 
 
@@ -24,12 +25,7 @@ class VendingMachine:
             Money.M_500,
             Money.M_1000,
         )
-        self.drink_box = {
-            "cola": {
-                "amount": 5,
-                "price": 120,
-            },
-        }
+        self.drink_box = DrinkBox()
 
     @property
     def total(self) -> int:
@@ -82,8 +78,4 @@ class VendingMachine:
         List[Dict[str, Any]]
             在庫
         """
-        return [{"name": name, **info} for name, info in self.drink_box.items()]
-
-
-# TODO: drink_boxの持ち方？実装？を見直す driver: ozawa
-# 注意：責務を持ちすぎていませんか？責任を持ちすぎていたら分割しましょう
+        return [{"name": name, **info} for name, info in self.drink_box.inventory.items()]
