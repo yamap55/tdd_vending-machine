@@ -3,6 +3,8 @@
 
 from typing import Any, Dict, List
 
+from vending_machine.drink import Cola
+
 
 class DrinkBox:
     """
@@ -14,8 +16,8 @@ class DrinkBox:
         コンストラクタ
         """
         self.container = {
-            "cola": {
-                "amount": 5,
+            Cola: {
+                "value": [Cola(), Cola(), Cola(), Cola(), Cola()],
                 "price": 120,
             }
         }
@@ -29,4 +31,7 @@ class DrinkBox:
         List[Dict[str, Any]]
             管理している飲み物の情報
         """
-        return [{"name": name, **info} for name, info in self.container.items()]
+        return [
+            {"name": drink.name, "amount": len(info["value"]), "price": info["price"]}
+            for drink, info in self.container.items()
+        ]

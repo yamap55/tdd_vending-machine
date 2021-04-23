@@ -28,7 +28,7 @@ class Cola(Drink):
     コーラ
     """
 
-    name = "コーラ"
+    name = "cola"
 
 
 class Water(Drink):
