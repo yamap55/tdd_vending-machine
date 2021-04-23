@@ -1,7 +1,7 @@
 """
 飲み物
 """
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
 class Drink(ABC):
@@ -9,7 +9,18 @@ class Drink(ABC):
     飲み物
     """
 
-    pass
+    @property
+    @abstractmethod
+    def name(self) -> str:
+        """
+        飲み物名
+
+        Returns
+        -------
+        str
+            飲み物名
+        """
+        pass
 
 
 class Cola(Drink):
@@ -17,7 +28,7 @@ class Cola(Drink):
     コーラ
     """
 
-    pass
+    name = "コーラ"
 
 
 class Water(Drink):
@@ -25,7 +36,7 @@ class Water(Drink):
     水
     """
 
-    pass
+    name = "水"
 
 
 class Tea(Drink):
@@ -33,4 +44,4 @@ class Tea(Drink):
     お茶
     """
 
-    pass
+    name = "お茶"
