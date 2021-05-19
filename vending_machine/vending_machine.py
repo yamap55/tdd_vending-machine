@@ -50,7 +50,10 @@ class VendingMachine:
         List[Dict[str, Any]]
             自販機のメニュー
         """
-        return [{"drink": Cola, "price": 120, "soldout": False}]
+        result = []
+        for info in self.drink_box.info():
+            result.append({"drink": info["drink"], "price": 120, "soldout": info["amount"] < 1})
+        return result
 
     def insert(self, *money_list: Money) -> None:
         """
