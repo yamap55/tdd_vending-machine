@@ -4,6 +4,7 @@
 
 from typing import Any, Dict, List
 
+from vending_machine.drink import Cola
 from vending_machine.drink_box import DrinkBox
 from vending_machine.money import Money
 
@@ -38,6 +39,18 @@ class VendingMachine:
             投入金額
         """
         return sum(money.amount for money in self.money_box)
+
+    @property
+    def menu(self) -> List[Dict[str, Any]]:
+        """
+        自販機のメニューを返す
+
+        Returns
+        -------
+        List[Dict[str, Any]]
+            自販機のメニュー
+        """
+        return [{"drink": Cola, "price": 120, "soldout": False}]
 
     def insert(self, *money_list: Money) -> None:
         """
