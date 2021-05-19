@@ -31,6 +31,6 @@ class DrinkBox:
             管理している飲み物の情報
         """
         return [
-            {"name": drink.name, "amount": len(drink_list)}
+            {"drink": drink, "amount": len(drink_list)}
             for drink, drink_list in self.container.items()
         ]

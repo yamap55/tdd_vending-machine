@@ -1,5 +1,6 @@
 import pytest
 
+from vending_machine.drink import Cola
 from vending_machine.money import Money
 from vending_machine.vending_machine import VendingMachine
 
@@ -20,11 +21,16 @@ class TestVendingMachine:
         actual = self.vending_machine.get_inventory()
         expected = [
             {
-                "name": "cola",
+                "drink": Cola,
                 "amount": 5,
             }
         ]
 
+        assert actual == expected
+
+    def test_menu(self):
+        actual = self.vending_machine.menu
+        expected = [{"drink": Cola, "price": 120, "soldout": False}]
         assert actual == expected
 
 

@@ -1,5 +1,6 @@
 import pytest
 
+from vending_machine.drink import Cola
 from vending_machine.drink_box import DrinkBox
 
 
@@ -8,11 +9,11 @@ class TestInfo:
     def setup(self):
         self.drink_box = DrinkBox()
 
-    def test_nomal(self):
+    def test_normal(self):
         actual = self.drink_box.info()
         expected = [
             {
-                "name": "cola",
+                "drink": Cola,
                 "amount": 5,
             }
         ]
