@@ -21,7 +21,7 @@ class TestVendingMachine:
         actual = self.vending_machine.get_inventory()
         expected = [
             {
-                "name": "cola",
+                "drink": Cola,
                 "amount": 5,
             }
         ]
