@@ -35,7 +35,7 @@ class TestVendingMachine:
         assert actual == expected
 
     def test_is_not_buy_cola(self):
-        assert not self.vending_machine.is_buy_cola()
+        assert not self.vending_machine.is_buy_drink(Cola)
 
 
 class TestInsert:
