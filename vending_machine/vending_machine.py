@@ -116,6 +116,4 @@ class VendingMachine:
         bool
             買えるかどうか
         """
-        if sum([money.amount for money in self.money_box]) >= self.drink_price[drink]:
-            return True
-        return False
+        return sum(money.amount for money in self.money_box) >= self.drink_price[drink]
