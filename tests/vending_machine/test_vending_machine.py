@@ -34,6 +34,9 @@ class TestVendingMachine:
         expected = [Menu(drink=Cola, price=120, soldout=False)]
         assert actual == expected
 
+    def test_is_not_buy_cola(self):
+        assert not self.vending_machine.is_buy_cola()
+
 
 class TestInsert:
     @pytest.fixture(autouse=True)
