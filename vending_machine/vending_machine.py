@@ -99,3 +99,21 @@ class VendingMachine:
             在庫
         """
         return self.drink_box.info()
+
+    def is_buy_drink(self, drink: Drink) -> bool:
+        """
+        飲み物が買えるかどうかを判定する
+
+        投入金額を加味して買えるかどうか判定する
+
+        Parameters
+        ----------
+        drink : Drink
+            判定対象となる飲み物
+
+        Returns
+        -------
+        bool
+            買えるかどうか
+        """
+        return sum(money.amount for money in self.money_box) >= self.drink_price[drink]

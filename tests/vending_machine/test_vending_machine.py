@@ -79,3 +79,16 @@ class TestPayBack:
         actual = self.vending_machine.money_box
         expected = []
         assert actual == expected
+
+
+class TestIsBuyDrink:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.vending_machine = VendingMachine()
+
+    def test_is_not_buy_cola(self):
+        assert not self.vending_machine.is_buy_drink(Cola)
+
+    def test_is_buy_cola(self):
+        self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
+        assert self.vending_machine.is_buy_drink(Cola)
