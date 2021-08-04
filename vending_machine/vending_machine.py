@@ -28,7 +28,7 @@ class VendingMachine:
             Money.M_1000,
         )
         self.drink_box = DrinkBox()
-        self.drink_price = {Cola: 120}
+        self.drink_price:Dict[Type[Drink], int] = {Cola: 120}
 
     @property
     def total(self) -> int:
@@ -100,7 +100,7 @@ class VendingMachine:
         """
         return self.drink_box.info()
 
-    def is_buy_drink(self, drink: Drink) -> bool:
+    def is_buy_drink(self, drink: Type[Drink]) -> bool:
         """
         飲み物が買えるかどうかを判定する
 
