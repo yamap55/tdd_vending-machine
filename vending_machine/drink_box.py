@@ -19,10 +19,10 @@ class DrinkBox:
         """
         # TODO: Keyの型とValueの型が一致する事がわかるようなType Hintに変更する
         # 例としてはKeyがColaでValueがWaterという事が許されてしまう
-        if container:
-            self.container = container
-        else:
+        if container is None:
             self.container: _container_type = {Cola: [Cola(), Cola(), Cola(), Cola(), Cola()]}
+        else:
+            self.container = container
 
     def __contains__(self, item: Type[Drink]) -> bool:
         """
