@@ -90,6 +90,9 @@ class TestIsBuyDrink:
         assert not self.vending_machine.is_buy_drink(Cola)
 
     def test_is_buy_cola(self):
+        """
+        飲み物が売っている、かつお金が足りている場合、購入可能
+        """
         self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
         assert self.vending_machine.is_buy_drink(Cola)
 
