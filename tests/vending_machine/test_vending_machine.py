@@ -103,3 +103,11 @@ class TestBuyDrink:
         self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
         actual = self.vending_machine.buy_drink(Cola)
         assert isinstance(actual, Cola)
+
+    def test_money_short(self):
+        self.vending_machine.insert(Money.M_100, Money.M_10)
+        with pytest.raises(ValueError) as excinfo:
+            self.vending_machine.buy_drink(Cola)
+        actual = str(excinfo.value)
+        expected = "Exception: short of money."
+        assert actual == expected

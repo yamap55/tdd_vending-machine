@@ -132,4 +132,6 @@ class VendingMachine:
         Drink
             飲み物
         """
-        return drink()
+        if self.is_buy_drink(drink):
+            return drink()
+        raise ValueError("Exception: short of money.")
