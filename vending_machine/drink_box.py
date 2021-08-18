@@ -1,9 +1,11 @@
 """飲み物の管理"""
 
 
-from typing import Any, Dict, List, Type
+from typing import Any, Dict, List, Optional, Type
 
 from vending_machine.drink import Cola, Drink
+
+_container_type = Dict[Type[Drink], List[Drink]]
 
 
 class DrinkBox:
@@ -11,15 +13,34 @@ class DrinkBox:
     飲み物の管理
     """
 
-    def __init__(self):
+    def __init__(self, container: Optional[_container_type] = None):
         """
         コンストラクタ
         """
         # TODO: Keyの型とValueの型が一致する事がわかるようなType Hintに変更する
         # 例としてはKeyがColaでValueがWaterという事が許されてしまう
-        self.container: Dict[Type[Drink], List[Drink]] = {
-            Cola: [Cola(), Cola(), Cola(), Cola(), Cola()]
-        }
+        if container:
+            self.container = container
+        else:
+            self.container: _container_type = {Cola: [Cola(), Cola(), Cola(), Cola(), Cola()]}
+
+    def __contains__(self, item: Type[Drink]) -> bool:
+        """
+        指定された飲み物を保持しているかを判定する
+
+        ※0本（空のList）の場合はFalse返す
+
+        Parameters
+        ----------
+        item : Type[Drink]
+            判定対象の飲み物
+
+        Returns
+        -------
+        bool
+            保持しているかどうか
+        """
+        return (item in self.container) and bool(self.container[item])
 
     def info(self) -> List[Dict[str, Any]]:
         """
@@ -40,6 +61,8 @@ class DrinkBox:
         """
         飲み物を取り出す。
 
+        ※取り出すものがない場合には例外を投げる（inで確認の上使用する事を想定）
+
         Parameters
         ----------
         drink : Type[Drink]
@@ -50,6 +73,7 @@ class DrinkBox:
         Drink
             取り出した飲み物
         """
-        # TODO: 飲み物がKeyとして存在しない場合の処理を追加
-        # TODO: 飲み物の本数が0の場合の処理を追加
-        return self.container[drink].pop(0)
+        result = self.container[drink].pop(0)
+        if not self.container[drink]:
+            del self.container[drink]
+        return result
