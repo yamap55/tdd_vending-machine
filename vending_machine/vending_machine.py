@@ -117,3 +117,19 @@ class VendingMachine:
             買えるかどうか
         """
         return sum(money.amount for money in self.money_box) >= self.drink_price[drink]
+
+    def buy_drink(self, drink: Type[Drink]) -> Drink:
+        """
+        指定した飲み物を購入する
+
+        Parameters
+        ----------
+        drink : Type[Drink]
+            購入対象となる飲み物
+
+        Returns
+        -------
+        Drink
+            飲み物
+        """
+        return drink()

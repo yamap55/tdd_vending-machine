@@ -92,3 +92,14 @@ class TestIsBuyDrink:
     def test_is_buy_cola(self):
         self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
         assert self.vending_machine.is_buy_drink(Cola)
+
+
+class TestBuyDrink:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.vending_machine = VendingMachine()
+
+    def test_buy_drink(self):
+        self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
+        actual = self.vending_machine.buy_drink(Cola)
+        assert isinstance(actual, Cola)
