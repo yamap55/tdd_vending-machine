@@ -1,6 +1,7 @@
 import pytest
 
 from vending_machine.drink import Cola
+from vending_machine.drink_box import DrinkBox
 from vending_machine.menu import Menu
 from vending_machine.money import Money
 from vending_machine.vending_machine import VendingMachine
@@ -86,9 +87,36 @@ class TestIsBuyDrink:
     def setup(self):
         self.vending_machine = VendingMachine()
 
-    def test_is_not_buy_cola(self):
+    def test_is_not_buy_cola_short_money(self):
+        assert not self.vending_machine.is_buy_drink(Cola)
+
+    def test_is_not_buy_cola_soldout(self):
+        self.vending_machine = VendingMachine(drink_box=DrinkBox({}))
+        self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
         assert not self.vending_machine.is_buy_drink(Cola)
 
     def test_is_buy_cola(self):
+        """
+        飲み物が売っている、かつお金が足りている場合、購入可能
+        """
         self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
         assert self.vending_machine.is_buy_drink(Cola)
+
+
+class TestBuyDrink:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.vending_machine = VendingMachine()
+
+    def test_buy_drink(self):
+        self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
+        actual = self.vending_machine.buy_drink(Cola)
+        assert isinstance(actual, Cola)
+
+    def test_money_short(self):
+        self.vending_machine.insert(Money.M_100, Money.M_10)
+        with pytest.raises(ValueError) as excinfo:
+            self.vending_machine.buy_drink(Cola)
+        actual = str(excinfo.value)
+        expected = "Exception: short of money."
+        assert actual == expected

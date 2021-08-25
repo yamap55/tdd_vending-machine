@@ -2,7 +2,7 @@
 飲み物の自動販売機
 """
 
-from typing import Any, Dict, List, Type
+from typing import Any, Dict, List, Optional, Type
 
 from vending_machine.drink import Cola, Drink
 from vending_machine.drink_box import DrinkBox
@@ -15,7 +15,7 @@ class VendingMachine:
     飲み物の自動販売機
     """
 
-    def __init__(self):
+    def __init__(self, drink_box: Optional[DrinkBox] = None):
         """
         初期処理
         """
@@ -27,7 +27,7 @@ class VendingMachine:
             Money.M_500,
             Money.M_1000,
         )
-        self.drink_box = DrinkBox()
+        self.drink_box = DrinkBox() if drink_box is None else drink_box
         self.drink_price: Dict[Type[Drink], int] = {Cola: 120}
 
     @property
@@ -54,7 +54,7 @@ class VendingMachine:
         """
 
         def f(drink: Type[Drink], price: int) -> Menu:
-            return Menu(drink=drink, price=price, soldout=not bool(self.drink_box.container[drink]))
+            return Menu(drink=drink, price=price, soldout=drink not in self.drink_box)
 
         result = [f(drink, price) for drink, price in self.drink_price.items()]
         return result
@@ -104,6 +104,8 @@ class VendingMachine:
         """
         飲み物が買えるかどうかを判定する
 
+        飲み物がそもそも売っているかどうか判定する
+        飲み物がsoldoutどうか判定する
         投入金額を加味して買えるかどうか判定する
 
         Parameters
@@ -116,4 +118,26 @@ class VendingMachine:
         bool
             買えるかどうか
         """
-        return sum(money.amount for money in self.money_box) >= self.drink_price[drink]
+        return (
+            (drink in self.drink_price)
+            and (drink in self.drink_box)
+            and sum(money.amount for money in self.money_box) >= self.drink_price[drink]
+        )
+
+    def buy_drink(self, drink: Type[Drink]) -> Drink:
+        """
+        指定した飲み物を購入する
+
+        Parameters
+        ----------
+        drink : Type[Drink]
+            購入対象となる飲み物
+
+        Returns
+        -------
+        Drink
+            飲み物
+        """
+        if self.is_buy_drink(drink):
+            return drink()
+        raise ValueError("Exception: short of money.")
