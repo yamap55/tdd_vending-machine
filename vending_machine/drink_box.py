@@ -3,7 +3,7 @@
 
 from typing import Any, Dict, List, Optional, Type
 
-from vending_machine.drink import Cola, Drink
+from vending_machine.drink import Drink
 
 _container_type = Dict[Type[Drink], List[Drink]]
 
@@ -20,7 +20,7 @@ class DrinkBox:
         # TODO: Keyの型とValueの型が一致する事がわかるようなType Hintに変更する
         # 例としてはKeyがColaでValueがWaterという事が許されてしまう
         if container is None:
-            self.container: _container_type = {Cola: [Cola(), Cola(), Cola(), Cola(), Cola()]}
+            self.container: _container_type = {}
         else:
             self.container = container
 

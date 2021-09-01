@@ -21,18 +21,36 @@ class TestVendingMachine:
 
     def test_initial_inventory(self):
         actual = self.vending_machine.get_inventory()
-        expected = [
-            {
-                "drink": Cola,
-                "amount": 5,
-            }
-        ]
-
+        expected = []
         assert actual == expected
 
-    def test_menu(self):
-        actual = self.vending_machine.menu
+
+class TestMenu:
+    def test_not_soldout(self):
+        # 在庫はあり販売している
+        drink_price = {Cola: 120}
+        drink_box = DrinkBox({Cola: [Cola()]})
+        vending_machine = VendingMachine(
+            drink_box=drink_box, drink_price=drink_price  # type: ignore
+        )
+        actual = vending_machine.menu
         expected = [Menu(drink=Cola, price=120, soldout=False)]
+        assert actual == expected
+
+    def test_soldout(self):
+        # 在庫はないけど販売している
+        drink_price = {Cola: 120}
+        vending_machine = VendingMachine(drink_price=drink_price)  # type: ignore
+        actual = vending_machine.menu
+        expected = [Menu(drink=Cola, price=120, soldout=True)]
+        assert actual == expected
+
+    def test_not_setting_price(self):
+        # 在庫はあるけど販売していない（値段が付いていない）
+        drink_box = DrinkBox({Cola: [Cola()]})
+        vending_machine = VendingMachine(drink_box=drink_box, drink_price={})
+        actual = vending_machine.menu
+        expected = []
         assert actual == expected
 
 
@@ -83,30 +101,37 @@ class TestPayBack:
 
 
 class TestIsBuyDrink:
-    @pytest.fixture(autouse=True)
-    def setup(self):
-        self.vending_machine = VendingMachine()
-
     def test_is_not_buy_cola_short_money(self):
-        assert not self.vending_machine.is_buy_drink(Cola)
+        drink_box = DrinkBox({Cola: [Cola()]})
+        vending_machine = VendingMachine(drink_box=drink_box)
+        assert not vending_machine.is_buy_drink(Cola)
 
     def test_is_not_buy_cola_soldout(self):
-        self.vending_machine = VendingMachine(drink_box=DrinkBox({}))
-        self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
-        assert not self.vending_machine.is_buy_drink(Cola)
+        vending_machine = VendingMachine()
+        vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
+        assert not vending_machine.is_buy_drink(Cola)
 
     def test_is_buy_cola(self):
         """
         飲み物が売っている、かつお金が足りている場合、購入可能
         """
-        self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
-        assert self.vending_machine.is_buy_drink(Cola)
+        drink_box = DrinkBox({Cola: [Cola()]})
+        drink_price = {Cola: 120}
+        vending_machine = VendingMachine(
+            drink_box=drink_box, drink_price=drink_price  # type: ignore
+        )
+        vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
+        assert vending_machine.is_buy_drink(Cola)
 
 
 class TestBuyDrink:
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.vending_machine = VendingMachine()
+        drink_box = DrinkBox({Cola: [Cola()]})
+        drink_price = {Cola: 120}
+        self.vending_machine = VendingMachine(
+            drink_box=drink_box, drink_price=drink_price  # type: ignore
+        )
 
     def test_buy_drink(self):
         self.vending_machine.insert(Money.M_100, Money.M_10, Money.M_10)
