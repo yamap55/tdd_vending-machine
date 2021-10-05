@@ -24,6 +24,11 @@ class TestVendingMachine:
         expected = []
         assert actual == expected
 
+    def test_revenue(self):
+        actual = self.vending_machine.revenue
+        expected = 0
+        assert actual == expected
+
 
 class TestMenu:
     def test_not_soldout(self):
@@ -144,6 +149,11 @@ class TestBuyDrink:
         def test_inventroy(self):
             actual = self.vending_machine.get_inventory()
             expected = []
+            assert actual == expected
+
+        def test_revenue(self):
+            actual = self.vending_machine.revenue
+            expected = 120
             assert actual == expected
 
     class TestBuyDrinkIncompleted:

@@ -19,6 +19,7 @@ class VendingMachine:
         self,
         drink_box: Optional[DrinkBox] = None,
         drink_price: Optional[Dict[Type[Drink], int]] = None,
+        revenue: int = 0,
     ):
         """
         初期処理
@@ -33,6 +34,7 @@ class VendingMachine:
         )
         self.drink_box = DrinkBox() if drink_box is None else drink_box
         self.drink_price: Dict[Type[Drink], int] = {} if drink_price is None else drink_price
+        self.revenue = revenue
 
     @property
     def amount(self) -> int:
@@ -143,5 +145,7 @@ class VendingMachine:
             飲み物
         """
         if self.is_buy_drink(drink):
-            return self.drink_box.get(drink)
+            returned = self.drink_box.get(drink)
+            self.revenue += self.drink_price[drink]
+            return returned
         raise ValueError("Exception: short of money.")
