@@ -20,11 +20,12 @@ class VendingMachine:
         drink_box: Optional[DrinkBox] = None,
         drink_price: Optional[Dict[Type[Drink], int]] = None,
         revenue: int = 0,
+        money_box: Optional[List[Money]] = None,
     ):
         """
         初期処理
         """
-        self.money_box = []
+        self.money_box = [] if money_box is None else money_box
         self.allow_money = (
             Money.M_10,
             Money.M_50,
@@ -155,3 +156,16 @@ class VendingMachine:
         change = self.amount - drink_price
         self.money_box.clear()
         return returned, change
+
+    def get_is_buy_drink(self) -> List[Type[Drink]]:
+        """
+        購入可能な飲み物を返す
+
+        ※投入金額、在庫を考慮する
+
+        Returns
+        -------
+        List[Type[Drink]]
+            購入可能な飲み物
+        """
+        return [drink for drink, _ in self.drink_price.items() if self.is_buy_drink(drink)]
